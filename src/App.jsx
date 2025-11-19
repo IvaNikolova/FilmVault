@@ -1,11 +1,7 @@
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-      <h1 className="text-4xl font-bold">
-        Tailwind Works 🎉
-      </h1>
+    <div className="text-black text-3xl p-6">
+      Home Page (Temporary)
     </div>
   );
 }
-
-export default App;
