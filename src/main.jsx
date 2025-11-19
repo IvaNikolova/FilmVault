@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 import "./index.css";
 
+// Pages
 import App from "./App";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,18 +15,71 @@ import MovieDetails from "./pages/MovieDetails";
 import Wishlist from "./pages/Wishlist";
 import Recommendations from "./pages/Recommendations";
 
+function Layout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <div className="pt-6">{children}</div>
+    </>
+  );
+}
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/recommendations" element={<Recommendations />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Protected pages */}
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Movies />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Wishlist />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/recommendations"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Recommendations />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/movie/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <MovieDetails />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
