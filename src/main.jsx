@@ -14,6 +14,8 @@ import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import Wishlist from "./pages/Wishlist";
 import Recommendations from "./pages/Recommendations";
+import GenrePage from "./pages/GenrePage";
+
 
 function Layout({ children }) {
   return (
@@ -35,8 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/register" element={<Register />} />
 
           {/* Protected pages */}
-          <Route
-            path="/movies"
+          <Route path="/movies"
             element={
               <ProtectedRoute>
                 <Layout>
@@ -46,8 +47,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
 
-          <Route
-            path="/wishlist"
+          <Route path="/wishlist"
             element={
               <ProtectedRoute>
                 <Layout>
@@ -57,8 +57,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
 
-          <Route
-            path="/recommendations"
+          <Route path="/recommendations"
             element={
               <ProtectedRoute>
                 <Layout>
@@ -68,12 +67,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
 
-          <Route
-            path="/movie/:id"
+          <Route path="/movie/:id"
             element={
               <ProtectedRoute>
                 <Layout>
                   <MovieDetails />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/genre/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <GenrePage />
                 </Layout>
               </ProtectedRoute>
             }
