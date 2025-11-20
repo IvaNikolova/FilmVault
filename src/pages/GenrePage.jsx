@@ -9,12 +9,16 @@ export default function GenrePage() {
     const [genreName, setGenreName] = useState("");
 
     useEffect(() => {
-        getMoviesByGenre(id).then((data) => setMovies(data));
-        getGenres().then((genres) => {
-            const found = genres.find((g) => g.id === Number(id));
-            setGenreName(found ? found.name : "");
-        });
+        async function loadMovies() {
+            const page1 = await getMoviesByGenre(id, 1);
+            const page2 = await getMoviesByGenre(id, 2);
+            const page3 = await getMoviesByGenre(id, 3);
+
+            setMovies([...page1, ...page2, ...page3]);
+        }
+        loadMovies();
     }, [id]);
+
 
     return (
         <div className="p-6 text-black">

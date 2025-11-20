@@ -11,12 +11,12 @@ export async function getGenres() {
 }
 
 // Movies by genre
-export async function getMoviesByGenre(genreId) {
-    const response = await fetch(
-        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`
-    );
-    const data = await response.json();
-    return data.results;
+export async function getMoviesByGenre(genreId, page = 1) {
+  const response = await fetch(
+    `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`
+  );
+  const data = await response.json();
+  return data.results;
 }
 
 // Popular movies
