@@ -23,8 +23,8 @@ export default function MovieRow({ genre }) {
 
             {/* Horizontal movie list */}
             <div className="flex overflow-x-scroll gap-4 pb-3 scrollbar-hide">
-                {movies.map((movie) => (
-                    <div key={movie.id} className="shrink-0">
+                {movies.map((movie, index) => (
+                    <div key={`${movie.id}-${index}`} className="shrink-0">
                         <MovieCard movie={movie} />
                     </div>
                 ))}
