@@ -1,19 +1,51 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getMovieDetails } from "../api/tmdb";
+import { useAuth } from "../context/AuthContext";
+import { addToWishlist, removeFromWishlist, checkIfInWishlist } from "../firebase";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
+  const [loadingWishlist, setLoadingWishlist] = useState(true);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     getMovieDetails(id).then(setMovie);
   }, [id]);
 
+  // Check if movie is already in wishlist
+  useEffect(() => {
+    async function checkStatus() {
+      if (!user) return;
+
+      const exists = await checkIfInWishlist(id, user.uid);
+      setIsSaved(exists);
+      setLoadingWishlist(false);
+    }
+
+    checkStatus();
+  }, [id, user]);
+
   if (!movie) return <p className="p-6">Loading...</p>;
 
   const IMG = "https://image.tmdb.org/t/p/w500";
   const uniqueGenres = [...new Map(movie.genres.map(g => [g.id, g])).values()];
+
+  // Handle add/remove button click
+  async function toggleWishlist() {
+    if (!user) return;
+
+    if (isSaved) {
+      await removeFromWishlist(movie.id, user.uid);
+      setIsSaved(false);
+    } else {
+      await addToWishlist(movie, user.uid);
+      setIsSaved(true);
+    }
+  }
 
   return (
     <div className="p-6 flex gap-10 text-black max-w-6xl mx-auto">
@@ -23,8 +55,9 @@ export default function MovieDetails() {
       {/* DETAILS */}
       <div>
         <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
-
-        <p className="text-gray-700 mb-6 leading-relaxed">
+        
+        <p><strong>Overview</strong></p>
+        <p className="text-gray-700 mb-5 leading-relaxed">
           {movie.overview}
         </p>
 
@@ -37,10 +70,22 @@ export default function MovieDetails() {
           </span>
           ))}
         </p>
+
         <p><strong>Release Date:</strong> {movie.release_date}</p>
         <p><strong>Runtime:</strong> {movie.runtime} min</p>
         <p><strong>Rating:</strong> {movie.vote_average.toFixed(1)} / 10</p>
+        
+        {!loadingWishlist && (
+          <button
+            onClick={toggleWishlist}
+            className={`mt-5 px-4 py-2 rounded-lg text-white font-semibold transition ${
+              isSaved ? "bg-red-500 hover:bg-red-600" : "bg-gray-700 hover:bg-gray-800"
+            }`}
+          >
+            {isSaved ? "🤍 Remove from Wishlist" : "❤️Add to Wishlist"}
+          </button>
+        )}
       </div>
     </div>
   );
-}
+} 
