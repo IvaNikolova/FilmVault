@@ -64,3 +64,12 @@ export async function getMovieDetails(movieId) {
     const data = await response.json();
     return data;
 }
+
+// Get related/similar movies
+export async function getSimilarMovies(movieId) {
+    const response = await fetch(
+        `${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`
+    );
+    const data = await response.json();
+    return data.results;
+}

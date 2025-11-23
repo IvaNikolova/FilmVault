@@ -15,6 +15,7 @@ import MovieDetails from "./pages/MovieDetails";
 import Wishlist from "./pages/Wishlist";
 import Recommendations from "./pages/Recommendations";
 import GenrePage from "./pages/GenrePage";
+import RelatedMovies from "./pages/RelatedMovies";
 
 
 function Layout({ children }) {
@@ -83,6 +84,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <ProtectedRoute>
                 <Layout>
                   <GenrePage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/movie/:id/related"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <RelatedMovies />
                 </Layout>
               </ProtectedRoute>
             }
