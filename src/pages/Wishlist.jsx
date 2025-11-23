@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { db } from "../firebase";
+import { db, removeFromWishlist } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import MovieGrid from "../components/MovieGrid";
+import MovieCard from "../components/MovieCard";
 
 export default function Wishlist() {
   const { user } = useAuth();
@@ -28,9 +29,13 @@ export default function Wishlist() {
       <h1 className="text-3xl font-bold mb-6 text-black">My Wishlist</h1>
 
       {movies.length === 0 ? (
-        <p className="text-gray-600">Your wishlist is empty 😊</p>
+        <p className="text-gray-600">Your wishlist is empty</p>
       ) : (
-        <MovieGrid movies={movies} />
+        <MovieGrid
+          movies={movies}
+          isRemovable={true}
+          onRemove={(movieId) => removeFromWishlist(movieId, user.uid)}
+        />
       )}
     </div>
   );
