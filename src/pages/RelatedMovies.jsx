@@ -8,16 +8,21 @@ export default function RelatedMovies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    async function loadRelated() {
-      const page1 = await getSimilarMovies(id, 1);
-      const page2 = await getSimilarMovies(id, 2);
-      const page3 = await getSimilarMovies(id, 3);
+    async function load() {
+        const p1 = await getSimilarMovies(id, 1);
+        const p2 = await getSimilarMovies(id, 2);
+        const p3 = await getSimilarMovies(id, 3);
 
-      setMovies([...page1, ...page2, ...page3]);
+        const combined = [...p1, ...p2, ...p3];
+
+        // remove duplicates based on movie.id
+        const unique = [...new Map(combined.map(m => [m.id, m])).values()];
+
+        setMovies(unique);
     }
 
-    loadRelated();
-  }, [id]);
+    load();
+    }, [id]);
 
   return (
     <div className="p-6 text-black">
