@@ -11,7 +11,7 @@ export default function MovieRow({ genre }) {
     }, [genre.id]);
 
     return (
-        <div className="mb-8">
+        <div className="">
             {/* Row Header */}
             <div className="flex justify-between items-center px-2 mb-3">
                 <h2 className="text-xl font-bold text-black">{genre.name}</h2>
@@ -25,7 +25,7 @@ export default function MovieRow({ genre }) {
             <div className="flex overflow-x-scroll gap-4 pb-3 scrollbar-hide">
                 {movies.map((movie, index) => (
                     <div key={`${movie.id}-${index}`} className="shrink-0">
-                        <MovieCard movie={movie} />
+                        <MovieCard  key={movie.id} movie={movie} />
                     </div>
                 ))}
             </div>

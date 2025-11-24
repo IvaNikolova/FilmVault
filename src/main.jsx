@@ -16,6 +16,7 @@ import Wishlist from "./pages/Wishlist";
 import Recommendations from "./pages/Recommendations";
 import GenrePage from "./pages/GenrePage";
 import RelatedMovies from "./pages/RelatedMovies";
+import Search from "./pages/Search";
 
 
 function Layout({ children }) {
@@ -99,6 +100,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Search />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>
