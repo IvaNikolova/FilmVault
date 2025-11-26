@@ -96,7 +96,7 @@ export default function MovieDetails() {
       {related.length > 0 && (
         <div className="ml-8">
           <div className="flex justify-between items-center px-2 mb-3">
-            <h2 className="text-xl font-bold text-black">Related Movies</h2>
+            <h2 className="text-xl font-bold text-black">Similar Movies</h2>
 
             <Link
               to={`/movie/${id}/related`}
@@ -104,7 +104,7 @@ export default function MovieDetails() {
             >
               See all →
             </Link>
-            </div>
+          </div>
           <div className="flex overflow-x-scroll gap-4 pb-3 scrollbar-hide">
             {related.slice(0, 15).map(movie => (
               <div key={movie.id} className="flex-shrink-0">
