@@ -17,6 +17,8 @@ import Recommendations from "./pages/Recommendations";
 import GenrePage from "./pages/GenrePage";
 import RelatedMovies from "./pages/RelatedMovies";
 import Search from "./pages/Search";
+import CategoryPage from "./pages/CategoryPage";
+
 
 
 function Layout({ children }) {
@@ -107,6 +109,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <ProtectedRoute>
                 <Layout>
                   <Search />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/category/:type"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <CategoryPage />
                 </Layout>
               </ProtectedRoute>
             }

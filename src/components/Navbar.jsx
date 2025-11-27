@@ -8,7 +8,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
-
   const handleLogout = async () => {
     await logout();
     navigate("/"); 
@@ -23,7 +22,14 @@ export default function Navbar() {
 
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      <h1 className="text-xl font-bold">🎬 Movie Wishlist</h1>
+      <Link to="/movies" className="text-xl font-bold">
+        🎬 Movie Wishlist
+      </Link>
+
+      <Link to="/category/popular" className="hover:text-purple-400">Popular</Link>
+      <Link to="/category/top_rated" className="hover:text-purple-400">Top Rated</Link>
+      <Link to="/category/upcoming" className="hover:text-purple-400"> Upcoming</Link>
+      <Link to="/category/now_playing" className="hover:text-purple-400">Now Playing</Link>
 
       {user && (
         <div className="flex items-center gap-6 text-lg">
@@ -38,7 +44,6 @@ export default function Navbar() {
             />
           </form>
 
-          <Link to="/movies" className="hover:text-purple-400">Movies</Link>
           <Link to="/wishlist" className="hover:text-purple-400">Wishlist</Link>
           <Link to="/recommendations" className="hover:text-purple-400">Recommendations</Link>
 
