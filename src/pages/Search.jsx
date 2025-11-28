@@ -61,7 +61,7 @@ export default function Search() {
             <div className="mt-12">
                 <h2 className="text-2xl font-bold mb-4 text-black">Popular Right Now</h2>
 
-                <div className="flex overflow-x-scroll gap-4 pb-3 scrollbar-hide">
+                <div className="flex gap-4 pb-3 scrollbar-hide">
                     {popular.slice(0, 15).map(movie => (
                         <div key={movie.id} className="flex-shrink-0">
                             <MovieCard movie={movie} />
