@@ -3,11 +3,14 @@ import { useAuth } from "../context/AuthContext";
 import { db, removeFromWishlist } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import MovieGrid from "../components/MovieGrid";
-import MovieCard from "../components/MovieCard";
+import Pagination from "../components/Pagination";
+
 
 export default function Wishlist() {
   const { user } = useAuth();
-  const [movies, setMovies] = useState([]);
+  const [ movies, setMovies ] = useState([]);
+  const [ page, setPage ] = useState(1);
+  const PAGE_SIZE = 20;
 
   useEffect(() => {
     if (!user) return;
@@ -19,10 +22,18 @@ export default function Wishlist() {
     const unsubscribe = onSnapshot(wishlistRef, (snapshot) => {
       const items = snapshot.docs.map((doc) => doc.data());
       setMovies(items);
+      setPage(1);  
     });
 
     return () => unsubscribe(); // cleanup on unmount
   }, [user]);
+
+  const totalPages = Math.ceil(movies.length / PAGE_SIZE);
+
+  const paginatedMovies = movies.slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE
+  );
 
   return (
     <div className="p-6">
@@ -32,9 +43,17 @@ export default function Wishlist() {
         <p className="text-gray-600">Your wishlist is empty</p>
       ) : (
         <MovieGrid
-          movies={movies}
+          movies={paginatedMovies}
           isRemovable={true}
           onRemove={(movieId) => removeFromWishlist(movieId, user.uid)}
+        />
+      )}
+
+      {totalPages > 1 && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          setPage={setPage}
         />
       )}
     </div>

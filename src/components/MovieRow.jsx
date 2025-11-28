@@ -7,7 +7,7 @@ export default function MovieRow({ genre }) {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        getMoviesByGenre(genre.id).then((data) => setMovies(data));
+        getMoviesByGenre(genre.id).then((data) => setMovies(data.results));
     }, [genre.id]);
 
     return (

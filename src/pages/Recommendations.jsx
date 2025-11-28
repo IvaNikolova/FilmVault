@@ -152,7 +152,7 @@ export default function Recommendations() {
     const combined = [...map.values()]
       .sort((a, b) => b.score - a.score)
       .map((entry) => entry.movie)
-      .slice(0, 30);
+      .slice(0, 40);
       
     setFinalRecommendations(combined);
   }, [genreMovies, similarMovies]);

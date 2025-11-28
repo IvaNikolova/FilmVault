@@ -12,20 +12,32 @@ export async function getGenres() {
 
 // Movies by genre
 export async function getMoviesByGenre(genreId, page = 1) {
+    const safePage = page  
+
     const response = await fetch(
-        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`
+        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${safePage}`
     );
+    const data = await response.json();
+
+    return {
+        results: data.results,
+        totalPages: data.total_pages
+    };
+}
+
+// Popular movies
+export async function getPopularMovies() {
+    const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
     const data = await response.json();
     return data.results;
 }
 
 // Search movies by text
-export async function searchMovies(query) {
-    const response = await fetch(
-        `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
+export async function searchMovies(query, page = 1) {
+    const res = await fetch(
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
     );
-    const data = await response.json();
-    return data.results;
+    return res.json(); 
 }
 
 // Movie details by ID
@@ -48,9 +60,8 @@ export async function getSimilarMovies(movieId) {
 
 // Movies by categories (Popular, Top Rated, ...)
 export async function getMoviesByCategory(type, page = 1) {
-    const response = await fetch(
+    const res = await fetch(
         `${BASE_URL}/movie/${type}?api_key=${API_KEY}&page=${page}`
     );
-    const data = await response.json();
-    return data.results;
+    return res.json(); 
 }

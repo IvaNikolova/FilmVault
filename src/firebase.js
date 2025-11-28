@@ -29,7 +29,7 @@ export async function addToWishlist(movie, userId) {
     title: movie.title,
     poster_path: movie.poster_path,
     release_date: movie.release_date,
-    genre_ids: movie.genre_ids,
+    genre_ids: movie.genre_ids || movie.genres?.map(g => g.id),
     timestamp: new Date()
   };
 

@@ -2,33 +2,39 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMoviesByGenre, getGenres } from "../api/tmdb";
 import MovieGrid from "../components/MovieGrid";
+import Pagination from "../components/Pagination";
+
 
 export default function GenrePage() {
     const { id } = useParams();
-    const [movies, setMovies] = useState([]);
-    const [genreName, setGenreName] = useState("");
+    const [ movies, setMovies ] = useState([]);
+    const [ genreName, setGenreName ] = useState("");
+    const [ page, setPage ] = useState(1);
+    const [ totalPages, setTotalPages ] = useState(1);
+
 
     useEffect(() => {
         async function loadMoviesAndName() {
-            //  Fetch all genres once
+            // Fetch all genres once
             const allGenres = await getGenres();
 
-            //  Find the genre whose ID matches the URL
+            // Find genre name
             const match = allGenres.find(g => g.id === parseInt(id));
+            if (match) setGenreName(match.name);
 
-            //  Store the name so we can show it in the title
-            if (match) {
-                setGenreName(match.name);
-            }
-
-            const page1 = await getMoviesByGenre(id, 1);
-            const page2 = await getMoviesByGenre(id, 2);
-            const page3 = await getMoviesByGenre(id, 3);
-
-            setMovies([...page1, ...page2, ...page3]);
+            // Fetch movies for selected page
+            const response = await getMoviesByGenre(id, page);
+            setMovies(Array.isArray(response.results) ? response.results : []);
+            setTotalPages(Math.min(response.totalPages, 20));
         }
         loadMoviesAndName();
+    }, [id, page]);
+
+    // Reset page when genre changes
+    useEffect(() => {
+        setPage(1);
     }, [id]);
+
 
     return (
         <div className="p-6 text-black">
@@ -37,6 +43,12 @@ export default function GenrePage() {
             </h1>
 
             <MovieGrid movies={movies} />
+
+            <Pagination
+                page={page}
+                totalPages={totalPages}
+                setPage={setPage}
+            />
         </div>
     );
 }

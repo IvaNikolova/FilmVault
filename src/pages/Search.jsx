@@ -3,17 +3,33 @@ import { useEffect, useState } from "react";
 import { searchMovies, getPopularMovies } from "../api/tmdb";
 import MovieGrid from "../components/MovieGrid";
 import MovieCard from "../components/MovieCard";
+import Pagination from "../components/Pagination";
 
 export default function Search() {
-    const [params] = useSearchParams();
+    const [ params ] = useSearchParams();
     const query = params.get("q");
-    const [results, setResults] = useState([]);
-    const [popular, setPopular] = useState([]);
+    const [ results, setResults ] = useState([]);
+    const [ page, setPage ] = useState(1);
+    const [ totalPages, setTotalPages ] = useState(1);
+    const [ popular, setPopular ] = useState([]);
+    
+    // Reset page when query changes
+    useEffect(() => {
+        setPage(1);
+    }, [query]);
 
+    // Fetch search results
     useEffect(() => {
         if (!query) return;
-        searchMovies(query).then(setResults);
-    }, [query]);
+
+        async function loadSearch() {
+            const data = await searchMovies(query, page);
+            setResults(data.results);
+            setTotalPages(Math.min(data.total_pages, 20));
+        }
+
+        loadSearch();
+    }, [query, page]);
 
     useEffect(() => {
         getPopularMovies().then(setPopular);
@@ -30,7 +46,15 @@ export default function Search() {
             {results.length === 0 ? (
                 <p>No results found.</p>
             ) : (
-                <MovieGrid movies={results} />
+                <>
+                    <MovieGrid movies={results} />
+                    
+                    <Pagination
+                        page={page}
+                        totalPages={totalPages}
+                        setPage={setPage}
+                    />
+                </>
             )}
 
             {/* Popular Right Now section */}
