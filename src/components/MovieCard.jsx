@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { addToWishlist, removeFromWishlist, checkIfInWishlist } from "../firebase";
+import { Heart } from "lucide-react";
 
 export default function MovieCard({ movie, isRemovable, onRemove }) {
     const imageBase = "https://image.tmdb.org/t/p/w500";
@@ -78,9 +79,14 @@ export default function MovieCard({ movie, isRemovable, onRemove }) {
             {!isRemovable && user && (
                 <button
                     onClick={toggleWishlist}
-                    className="absolute top-2 right-2 text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
-                >
-                    {isSaved ? "❤️" : "🤍"}
+                    className={`absolute top-1 right-1 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition duration-200 hover:bg-red-600
+                        ${isSaved 
+                            ? "bg-red-500 hover:bg-red-600" 
+                            : "bg-black/60 hover:bg-red-500"
+                        }
+                    `}>
+                      <Heart className={`w-4 h-4 ${isSaved ? "fill-white text-white" : ""}`} />
+
                 </button>
             )}
         </div>

@@ -4,6 +4,7 @@ import { getMovieDetails, getSimilarMovies } from "../api/tmdb";
 import { useAuth } from "../context/AuthContext";
 import { addToWishlist, removeFromWishlist, checkIfInWishlist } from "../firebase";
 import MovieCard from "../components/MovieCard";
+import { Heart } from "lucide-react";
 
 
 export default function MovieDetails() {
@@ -92,11 +93,12 @@ export default function MovieDetails() {
           {!loadingWishlist && (
             <button
               onClick={toggleWishlist}
-              className={`mt-5 px-4 py-2 rounded-lg text-white font-semibold transition ${
-                isSaved ? "bg-red-500 hover:bg-red-600" : "bg-gray-700 hover:bg-gray-800"
+              className={`mt-5 px-4 py-2 flex items-center gap-2 group-hover:opacity-100 hover:scale-105 shadow-md hover:shadow-lg duration-200 hover:bg-red-600 bg-black/60 text-white rounded-lg font-semibold transition ${
+                isSaved ?  "bg-red-500 hover:bg-red-600" : "bg-gray-900 hover:bg-red-500"
               }`}
             >
-              {isSaved ? "🤍 Remove from Wishlist" : "❤️Add to Wishlist"}
+              <Heart size={22} className={`${isSaved ? "fill-white text-white" : ""}`}/>
+              <span>{isSaved ? "Remove from Wishlist" : "Add to Wishlist"}</span>
             </button>
           )}
         </div>
