@@ -54,10 +54,20 @@ export default function MovieDetails() {
     <>
       <div className="p-6 flex gap-10 text-black max-w-6xl mx-auto">
         {/* POSTER */}
-        <img src={IMG + movie.poster_path} alt={movie.title} className="w-72 rounded shadow-lg"/>
+        <div className="w-72 h-[430px] rounded shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center flex-shrink-0">
+          <img
+            src={movie.poster_path ? IMG + movie.poster_path : "/no-image.jpg"}
+            alt={movie.title}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/no-image.jpg";
+            }}
+          />
+        </div>
 
         {/* DETAILS */}
-        <div>
+        <div className="flex-1 min-w-0">
           <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
           
           <p><strong>Overview</strong></p>
@@ -97,7 +107,6 @@ export default function MovieDetails() {
         <div className="ml-8">
           <div className="flex justify-between items-center px-2 mb-3">
             <h2 className="text-xl font-bold text-black">Similar Movies</h2>
-
             <Link
               to={`/movie/${id}/related`}
               className="text-sm text-black-300 hover:underline"

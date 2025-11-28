@@ -39,19 +39,25 @@ export default function MovieCard({ movie, isRemovable, onRemove }) {
             {/* Poster + Title (clickable for movie details) */}
             <Link to={`/movie/${movie.id}`}>
                 <div className="cursor-pointer transform transition duration-300 group-hover:scale-110">
-                <img
-                    src={movie.poster_path ? imageBase + movie.poster_path : "/no-image.jpg"}
-                    alt={movie.title}
-                    className="rounded-lg shadow-md"
-                />
+                    <div className="w-40 h-60 overflow-hidden rounded-lg shadow-md bg-gray-200">
+                        <img
+                            src={movie.poster_path ? imageBase + movie.poster_path : "/no-poster.jpg"}                            
+                            alt={movie.title}
+                            className="w-full h-[260px] object-cover rounded-lg"
+                            loading="lazy"
+                            onError={(e) => {
+                                { e.target.src = "/no-image.jpg"; }
+                            }}
+                        />
+                    </div>
 
-                <h3 className="mt-2 text-sm font-semibold text-black">
-                    {movie.title}
-                </h3>
+                    <h3 className="mt-2 text-sm font-semibold text-black">
+                        {movie.title}
+                    </h3>
 
-                <p className="text-gray-400 text-xs">
-                    {movie.release_date?.slice(0, 4)}
-                </p>
+                    <p className="text-gray-400 text-xs">
+                        {movie.release_date?.slice(0, 4)}
+                    </p>
                 </div>
             </Link>
 
