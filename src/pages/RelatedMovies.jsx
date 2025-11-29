@@ -23,7 +23,7 @@ export default function RelatedMovies() {
 
   return (
     <div className="p-6 text-black">
-      <h1 className="text-3xl font-bold mb-4">Similar Movies</h1>
+      <h1 className="text-3xl font-bold pl-2">Similar Movies</h1>
       <MovieGrid movies={movies} />
     </div>
   );

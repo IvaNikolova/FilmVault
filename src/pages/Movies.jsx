@@ -11,7 +11,7 @@ export default function Movies() {
 
   return (
     <div className="p-6 text-black">
-      <h1 className="text-3xl font-bold mb-6">Browse by Genre</h1>
+      <h1 className="text-3xl font-bold mb-6 pl-2">Browse by Genre</h1>
 
       {genres.map((genre) => (
         <MovieRow key={genre.id} genre={genre} />

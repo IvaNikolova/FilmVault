@@ -29,7 +29,7 @@ export default function CategoryPage() {
 
     return (
         <div className="p-6 text-black">
-            <h1 className="text-3xl font-bold mb-6">
+            <h1 className="text-3xl font-bold mb-6 pl-2">
                 {TITLES[type] || "Movies"}
             </h1>
 

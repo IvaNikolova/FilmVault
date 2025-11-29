@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 
-
 export default function Pagination({ page, totalPages, setPage }) {
     const maxVisible = 5;
     
@@ -74,7 +73,6 @@ export default function Pagination({ page, totalPages, setPage }) {
             >
                 <ChevronsRight size={18} />
             </button>
-
         </div>
     );
 }

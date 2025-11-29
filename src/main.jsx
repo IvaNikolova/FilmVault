@@ -25,7 +25,7 @@ function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <div className="pt-6">{children}</div>
+      <div className="">{children}</div>
     </>
   );
 }

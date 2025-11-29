@@ -80,12 +80,12 @@ export default function Recommendations() {
 
       // Always fetch the first top genre
       const res1 = await getMoviesByGenre(g1, 1);
-      all = [...all, ...res1];
+      all = [...all, ...(res1?.results || [])];
 
       // If a second genre exists, fetch that too
       if (g2) {
         const res2 = await getMoviesByGenre(g2, 1);
-        all = [...all, ...res2];
+        all = [...all, ...(res2?.results || [])];
       }
 
       // Remove duplicates by id
@@ -188,9 +188,9 @@ export default function Recommendations() {
 
   return (
     <div className="p-6 text-black">
-      <h1 className="text-3xl font-bold mb-6">Recommendations</h1>
+      <h1 className="text-3xl font-bold mb-6 pl-2">Recommendations</h1>
 
-      <div className="mb-6 p-4 bg-gray-100 rounded-lg text-gray-700 text-sm">
+      {/* <div className="mb-6 p-4 bg-gray-100 rounded-lg text-gray-700 text-sm">
         <p>
           <strong>Top genres:</strong>{" "}
           {topGenres.length
@@ -201,7 +201,7 @@ export default function Recommendations() {
           <strong>Last two movies added to wishlist:</strong>{" "}
           {lastTwo.length ? lastTwo.map((m) => m.title).join(", ") : "Not enough data"}
         </p>
-      </div>
+      </div> */}
 
       {finalRecommendations.length === 0 ? (
         <p className="text-gray-600">

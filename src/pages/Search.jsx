@@ -38,7 +38,7 @@ export default function Search() {
 
     return (
         <div className="p-6 text-black">
-            <h1 className="text-3xl font-bold mb-6 text-black">
+            <h1 className="text-3xl font-bold mb-6 pl-2 text-black">
                 Search results for: <span className="text-purple-600">"{query}"</span>
             </h1>
 
@@ -59,9 +59,9 @@ export default function Search() {
 
             {/* Popular Right Now section */}
             <div className="mt-12">
-                <h2 className="text-2xl font-bold mb-4 text-black">Popular Right Now</h2>
+                <h2 className="text-2xl font-bold mb-4 pl-2 text-black">Popular Right Now</h2>
 
-                <div className="flex gap-4 pb-3 scrollbar-hide">
+                <div className="flex gap-4 py-4 pl-2 overflow-x-auto scrollbar-hide">
                     {popular.slice(0, 15).map(movie => (
                         <div key={movie.id} className="flex-shrink-0">
                             <MovieCard movie={movie} />
