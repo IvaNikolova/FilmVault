@@ -1,16 +1,16 @@
-import { Globe, CircleSmall } from "lucide-react";
+import { Globe, CircleSmall, Clapperboard } from "lucide-react";
 import { SiGithub, SiReact, SiFirebase, SiTailwindcss, SiThemoviedatabase } from "@icons-pack/react-simple-icons";
 import { SiLinkedin } from "react-icons/si";
 
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-16 text-sm">
+    <footer className="bg-gray-900 text-gray-300 mt-10 text-sm">
         <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center md:place-items-center">
 
             {/* LEFT SECTION */}
             <div className="text-left">
-                <h2 className="text-white text-xl font-bold mb-2">🎬 Movie Wishlist</h2>
+                <h2 className="text-white text-xl font-bold mb-2 flex items-center gap-2"><Clapperboard size={24}/>FilmVault</h2>
                 <p className="text-gray-400 mb-3">Your personal movie universe.</p>
                 <p className="text-sm text-gray-500">Built by Iva Nikolova</p>
 

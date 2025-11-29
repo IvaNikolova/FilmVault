@@ -1,7 +1,7 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import { Search, CircleUserRound } from "lucide-react";
+import { Search, CircleUserRound, Clapperboard } from "lucide-react";
 
 export default function Navbar() {
   const { logout, user, profile } = useAuth();
@@ -36,10 +36,11 @@ export default function Navbar() {
 
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      <Link to="/movies" className="text-xl font-bold">
-        🎬 Movie Wishlist
+    <nav className="bg-gray-900 text-white px-6 py-4 pl-8 flex justify-between items-center shadow-md">
+      <Link to="/movies" className="text-2xl font-bold flex items-center gap-2">
+        <Clapperboard size={28}/>FilmVault
       </Link>
+
 
       <NavLink to="/category/popular" className={({ isActive }) => isActive ? "text-purple-400 font-semibold": "hover:text-purple-400"}>Popular</NavLink>
       <NavLink to="/category/top_rated" className={({ isActive }) => isActive ? "text-purple-400 font-semibold": "hover:text-purple-400"}>Top Rated</NavLink>

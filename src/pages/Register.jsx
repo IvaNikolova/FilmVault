@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import { Clapperboard } from "lucide-react";
+import bgImage from "../assets/poster1.jpg"; 
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
 
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -16,13 +18,12 @@ export default function Register() {
     setError("");
 
     if (!username.trim()) {
-      setError("Please enter a username.");
+      setError("Username is required");
       return;
     }
 
     try {
       await register(email, password, username);
-      alert("Registration successful! Please sign in.");
       navigate("/login");
     } catch (err) {
       setError(err.message);
@@ -30,63 +31,77 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-purple-400 via-pink-400 to-purple-600 flex items-center justify-center px-4">
-      <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Create Account
-        </h2>
+    <div className="min-h-screen w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bgImage})` }}>
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/70" />
 
-        {error && (
-          <p className="text-red-500 text-center mb-4 text-sm">{error}</p>
-        )}
+        {/* FORM CARD */}
+        <div className="relative min-h-screen flex items-center justify-center px-6">
+          <div className="bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-10 w-full max-w-md text-white">
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="input w-full px-3 py-2 mt-1 bg-gray-100 border border-gray-300 rounded"
-              required
-            />
-          </div>
+            {/* LOGO */}
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Clapperboard size={36} className="text-red-500" />
+              <h1 className="text-3xl font-bold tracking-wide">FilmVault</h1>
+            </div>
 
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full px-3 py-2 mt-1 bg-gray-100 border border-gray-300 rounded"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+            <p className="text-gray-400 text-center mb-6">
+              Create your vault and start collecting films.
+            </p>
 
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full px-3 py-2 mt-1 bg-gray-100 border border-gray-300 rounded"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+            {/* ERROR */}
+            {error && (
+              <div className="bg-red-500/20 text-red-300 text-sm text-center py-2 rounded mb-4">
+                {error}
+              </div>
+            )}
 
-          <button
-            type="submit"
-            className="w-full bg-pink-500 text-white py-3 rounded-lg hover:bg-pink-600 transition text-lg font-medium"
-          >
-            Register
-          </button>
-        </form>
+            <form onSubmit={handleSubmit} className="space-y-4">
 
-        <p className="text-gray-600 text-center mt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-pink-600 font-medium hover:underline">
-            Sign in
-          </Link>
-        </p>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 rounded bg-gray-900 border border-white/10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+                required
+              />
 
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded bg-gray-900 border border-white/10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+                required
+              />
+
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded bg-gray-900 border border-white/10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+                required
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-red-600 hover:bg-red-700 transition py-3 rounded-lg text-lg font-semibold"
+              >
+                Create Account
+              </button>
+
+            </form>
+
+            <p className="text-gray-400 text-center mt-6 text-sm">
+              Already registered?{" "}
+              <Link to="/login" className="text-red-400 hover:underline font-medium">
+                Sign in
+              </Link>
+            </p>
+
+        </div>
       </div>
     </div>
   );

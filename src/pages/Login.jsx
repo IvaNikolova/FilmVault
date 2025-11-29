@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { Clapperboard } from "lucide-react";
+import bgImage from "../assets/poster1.jpg"; // same background as landing
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,60 +20,75 @@ export default function Login() {
       await login(email, password);
       navigate("/movies");
     } catch (err) {
-      setError(err.message);
+      setError("Invalid email or password");
     }
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-purple-400 via-pink-400 to-purple-600 flex items-center justify-center px-4">
-      <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+    <div
+      className="min-h-screen w-full bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/70" />
 
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Sign In
-        </h2>
+      {/* CONTENT */}
+      <div className="relative min-h-screen flex items-center justify-center px-6">
+        <div className="bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-10 w-full max-w-md text-white">
 
-        {error && (
-          <div className="text-red-500 text-center mb-4 text-sm">{error}</div>
-        )}
+          {/* LOGO */}
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Clapperboard size={36} className="text-red-500" />
+            <h1 className="text-3xl font-bold tracking-wide">FilmVault</h1>
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="text-gray-700 font-medium">Email</label>
+          <p className="text-gray-400 text-center mb-6">
+            Welcome back. Sign in to your vault.
+          </p>
+
+          {error && (
+            <div className="bg-red-500/20 text-red-300 text-sm text-center py-2 rounded mb-4">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+
             <input
               type="email"
-              className="w-full px-3 py-2 mt-1 bg-gray-100 border border-gray-300 rounded"
+              placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 rounded bg-gray-900 border border-white/10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
               required
             />
-          </div>
 
-          <div>
-            <label className="text-gray-700 font-medium">Password</label>
             <input
               type="password"
-              className="w-full px-3 py-2 mt-1 bg-gray-100 border border-gray-300 rounded"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 rounded bg-gray-900 border border-white/10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
               required
             />
-          </div>
 
-          <button
-            type="submit"
-            className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition text-lg font-medium"
-          >
-            Sign In
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="w-full bg-red-600 hover:bg-red-700 transition py-3 rounded-lg text-lg font-semibold"
+            >
+              Sign In
+            </button>
 
-        <p className="text-gray-600 text-center mt-4">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-purple-600 font-medium hover:underline">
-            Register
-          </Link>
-        </p>
+          </form>
 
+          <p className="text-gray-400 text-center mt-6 text-sm">
+            New to FilmVault?{" "}
+            <Link to="/register" className="text-red-400 hover:underline font-medium">
+              Create an account
+            </Link>
+          </p>
+
+        </div>
       </div>
     </div>
   );
