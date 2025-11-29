@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import "./index.css";
 
 // Pages
@@ -19,17 +20,15 @@ import RelatedMovies from "./pages/RelatedMovies";
 import Search from "./pages/Search";
 import CategoryPage from "./pages/CategoryPage";
 
-
-
 function Layout({ children }) {
   return (
     <>
       <Navbar />
       <div className="">{children}</div>
+      <Footer />
     </>
   );
 }
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

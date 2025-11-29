@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { Search, CircleUserRound } from "lucide-react";
 
 export default function Navbar() {
-  const { logout, user } = useAuth();
+  const { logout, user, profile } = useAuth();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef(null);
+  
 
   const handleLogout = async () => {
     await logout();
@@ -71,9 +72,12 @@ export default function Navbar() {
             {/* DROPDOWN MENU */}
             {openMenu && (
               <div className="absolute right-0 mt-6 w-48 bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden z-50">
+                <p className="font-semibold px-4 py-2 transition">
+                  Hello, {profile?.username || "User"} 
+                </p>
 
                 <Link to="/wishlist" onClick={() => setOpenMenu(false)} className="block px-4 py-2 hover:bg-gray-700 transition">
-                  Wishlist
+                  My Wishlist
                 </Link>
 
                 <Link to="/recommendations" onClick={() => setOpenMenu(false)} className="block px-4 py-2 hover:bg-gray-700 transition">

@@ -1,16 +1,30 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(null); 
+
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser) {
+        const snap = await getDoc(doc(db, "users", currentUser.uid));
+
+        if (snap.exists()) {
+          setProfile(snap.data());   
+        }
+      } else {
+        setProfile(null);
+      }
+
       setLoading(false);
     });
 
@@ -18,8 +32,19 @@ export function AuthProvider({ children }) {
   }, []);
 
   // Register
-  function register(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function register(email, password, username) {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email: user.email,
+      // if username is missing, save an empty string instead of undefined
+      username: username || "",
+      createdAt: new Date().toISOString(),
+    });
+
+    return user;
   }
 
   // Login
@@ -33,7 +58,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, profile, loading, login, register, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );

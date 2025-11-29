@@ -39,7 +39,7 @@ export default function MovieCard({ movie, isRemovable, onRemove }) {
         <div className="w-40 relative group">
             {/* Poster + Title (clickable for movie details) */}
             <Link to={`/movie/${movie.id}`}>
-                <div className="cursor-pointer transform transition duration-300 group-hover:scale-110">
+                <div className="cursor-pointer transform transition duration-300 group-hover:scale-110 ">
                     <div className="w-40 h-60 overflow-hidden rounded-lg shadow-md bg-gray-200">
                         <img
                             src={movie.poster_path ? imageBase + movie.poster_path : "/no-poster.jpg"}                            

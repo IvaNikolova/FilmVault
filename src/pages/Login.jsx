@@ -27,7 +27,7 @@ export default function Login() {
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
 
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Login
+          Sign In
         </h2>
 
         {error && (
@@ -61,7 +61,7 @@ export default function Login() {
             type="submit"
             className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition text-lg font-medium"
           >
-            Login
+            Sign In
           </button>
         </form>
 
