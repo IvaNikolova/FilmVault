@@ -5,7 +5,7 @@ import { SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-10 text-sm">
+    <footer className="bg-gray-900 text-gray-300 text-sm">
         <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center md:place-items-center">
 
             {/* LEFT SECTION */}
@@ -52,19 +52,19 @@ export default function Footer() {
                 <h3 className="text-white font-semibold mb-2">Features</h3>
                 <ul className="space-y-1 text-gray-400 text-sm">
                     <li className="flex items-center gap-2">                        
-                        <CircleSmall size={8}/> Add to Wishlist
+                        Add to Wishlist
                     </li>
                     <li className="flex items-center gap-2">
-                        <CircleSmall size={8}/> Personalized Recommendations
+                        Personalized Recommendations
                     </li>
                     <li className="flex items-center gap-2">
-                        <CircleSmall size={8}/> Browse by Genre
+                        Browse by Genre
                     </li>
                     <li className="flex items-center gap-2">
-                        <CircleSmall size={8}/> Search Movies
+                        Search Movies
                     </li>
                     <li className="flex items-center gap-2">
-                        <CircleSmall size={8}/> Real-time Sync
+                        Real-time Sync
                     </li>
                 </ul>
             </div>
