@@ -46,7 +46,7 @@ export default function Search() {
 
             {/* Search Results section */}
             {results.length === 0 ? (
-                <p>No results found.</p>
+                <p className="px-2 pl-2 sm:px-6 lg:px-14 pt-10">No results found.</p>
             ) : (
                 <>
                     <MovieGrid movies={results} />

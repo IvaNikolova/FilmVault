@@ -40,7 +40,7 @@ export default function Wishlist() {
       <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">My Wishlist</h1>
 
       {movies.length === 0 ? (
-        <p className="text-gray-600">Your wishlist is empty</p>
+        <p className="text-gray-600 px-2 pl-2 sm:px-6 lg:px-14 pt-10">Your wishlist is empty</p>
       ) : (
         <MovieGrid
           movies={paginatedMovies}

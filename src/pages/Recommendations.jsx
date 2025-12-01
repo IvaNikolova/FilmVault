@@ -181,7 +181,7 @@ export default function Recommendations() {
     return (
       <div className="p-6 text-black">
         <h1 className="text-3xl font-bold mb-4">Recommendations</h1>
-        <p>Add movies to your wishlist to receive personalized recommendations.</p>
+        <p className="px-2 pl-2 sm:px-6 lg:px-14 pt-10">Add movies to your wishlist to receive personalized recommendations.</p>
       </div>
     );
   }

@@ -138,14 +138,14 @@ export default function MovieDetails() {
               <div className="">
                 <button
                   onClick={toggleWishlist}
-                  className={`group relative px-8 py-3 rounded-xl font-semibold flex items-center gap-3 shadow-lg transition-all duration-300
+                  className={`group relative px-8 py-3 rounded-xl font-semibold flex items-center gap-3 transition-all duration-300
                     ${isSaved
                       ? "bg-red-500 text-white hover:bg-red-600"
                       : "bg-black text-white hover:bg-red-500"
-                    }hover:scale-105 active:scale-95
+                    }hover:scale-105 active:scale-95  hover:bg-red-600
                   `}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-red-300/10 opacity-0 group-hover:opacity-100 transition" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-red-300/10 opacity-0 transition" />
                   <Heart size={22} className={`relative z-10 transition-all ${isSaved ? "fill-white" : ""}`}/>
                   <span className="relative z-10">
                     {isSaved ? "Remove from Wishlist" : "Add to Wishlist"}
