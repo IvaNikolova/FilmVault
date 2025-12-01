@@ -24,7 +24,9 @@ export default function Search() {
 
         async function loadSearch() {
             const data = await searchMovies(query, page);
-            setResults(data.results);
+            const sliced = data.results.slice(0, 18); // ✅ limit to 18
+
+            setResults(sliced);
             setTotalPages(Math.min(data.total_pages, 20));
         }
 
@@ -38,7 +40,7 @@ export default function Search() {
 
     return (
         <div className="p-6 text-black">
-            <h1 className="text-3xl font-bold mb-6 pl-2 text-black">
+            <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">
                 Search results for: <span className="text-purple-600">"{query}"</span>
             </h1>
 

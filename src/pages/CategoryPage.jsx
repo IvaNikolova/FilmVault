@@ -19,9 +19,9 @@ export default function CategoryPage() {
 
     useEffect(() => {
         async function loadMovies() {
-            const data = await getMoviesByCategory(type, page);
-            setMovies(data.results);
-            setTotalPages(Math.min(data.total_pages, 20)); 
+            const response = await getMoviesByCategory(type, page)
+            setMovies(response.results.slice(0, 18))
+            setTotalPages(Math.min(response.totalPages, 20));
         }
 
         loadMovies();
@@ -29,7 +29,7 @@ export default function CategoryPage() {
 
     return (
         <div className="p-6 text-black">
-            <h1 className="text-3xl font-bold mb-6 pl-2">
+            <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">
                 {TITLES[type] || "Movies"}
             </h1>
 

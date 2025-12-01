@@ -5,7 +5,7 @@ import { SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 text-sm">
+    <footer className="bg-black/90 backdrop-blur-xl text-gray-300 text-sm">
         <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center md:place-items-center">
 
             {/* LEFT SECTION */}

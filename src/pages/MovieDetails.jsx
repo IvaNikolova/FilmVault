@@ -71,9 +71,8 @@ export default function MovieDetails() {
 
           {/* DETAILS */}
           <div className="flex-1 space-y-6">
-
             {/* TITLE */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-black leading-tight">
               {movie.title}
             </h1>
 
@@ -97,11 +96,7 @@ export default function MovieDetails() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {uniqueGenres.map((g) => (
-                    <Link
-                      key={g.id}
-                      to={`/genre/${g.id}`}
-                      className="px-3 py-1.5 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition text-sm font-medium"
-                    >
+                    <Link key={g.id} to={`/genre/${g.id}`} className="px-3 py-1.5 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition text-sm font-medium">
                       {g.name}
                     </Link>
                   ))}
@@ -136,7 +131,6 @@ export default function MovieDetails() {
                   <span className="text-sm text-gray-500">/ 10</span>
                 </div>
               </div>
-
             </div>
 
             {/* WISHLIST BUTTON */}
@@ -144,60 +138,46 @@ export default function MovieDetails() {
               <div className="">
                 <button
                   onClick={toggleWishlist}
-                  className={`
-                    group relative px-8 py-3 rounded-xl font-semibold
-                    flex items-center gap-3 shadow-lg
-                    transition-all duration-300
+                  className={`group relative px-8 py-3 rounded-xl font-semibold flex items-center gap-3 shadow-lg transition-all duration-300
                     ${isSaved
                       ? "bg-red-500 text-white hover:bg-red-600"
                       : "bg-black text-white hover:bg-red-500"
-                    }
-                    hover:scale-105 active:scale-95
+                    }hover:scale-105 active:scale-95
                   `}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-red-300/10 opacity-0 group-hover:opacity-100 transition" />
-                  <Heart
-                    size={22}
-                    className={`relative z-10 transition-all ${isSaved ? "fill-white" : ""}`}
-                  />
+                  <Heart size={22} className={`relative z-10 transition-all ${isSaved ? "fill-white" : ""}`}/>
                   <span className="relative z-10">
                     {isSaved ? "Remove from Wishlist" : "Add to Wishlist"}
                   </span>
                 </button>
               </div>
             )}
-
           </div>
         </div>
-
       </div>
 
       {/* SIMILAR MOVIES */}
-        {related.length > 0 && (
-          <div className="mt-20">
-
-            <div className="flex justify-between items-center mb-5">
-              <h2 className="text-2xl sm:text-3xl font-bold text-black pl-2">
-                Similar Movies
-              </h2>
-              <Link
-                to={`/movie/${id}/related`}
-                className="text-gray-500 hover:text-red-500 font-semibold transition flex items-center gap-1"
-              >
-                See all →
-              </Link>
-            </div>
-
-            <div className="flex overflow-x-auto gap-4 pb-4 pl-2 pt-4 pr-2 scrollbar-hide">
-              {related.slice(0, 15).map(movie => (
-                <div key={movie.id} className="flex-shrink-0">
-                  <MovieCard movie={movie} />
-                </div>
-              ))}
-            </div>
-
+      {related.length > 0 && (
+        <div className="mt-20">
+          <div className="flex justify-between items-center mb-5">
+            <h2 className="text-2xl sm:text-3xl font-bold text-black pl-2">
+              Similar Movies
+            </h2>
+            <Link to={`/movie/${id}/related`} className="text-gray-500 hover:text-red-500 font-semibold transition flex items-center gap-1">
+              See all →
+            </Link>
           </div>
-        )}
+
+          <div className="flex overflow-x-auto gap-4 pb-4 pl-2 pt-4 pr-2 scrollbar-hide">
+            {related.slice(0, 15).map(movie => (
+              <div key={movie.id} className="flex-shrink-0">
+                <MovieCard movie={movie} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

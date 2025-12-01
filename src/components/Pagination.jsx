@@ -48,7 +48,7 @@ export default function Pagination({ page, totalPages, setPage }) {
                     className={`w-9 h-9 flex items-center justify-center rounded-full border text-sm font-medium transition
                     ${
                         p === page
-                        ? "bg-gray-900 text-white border-gray-900 shadow"
+                        ? "bg-black/90 backdrop-blur-xl text-white border-gray-900 shadow"
                         : "hover:bg-gray-100 border-gray-600"
                     }`}
                 >

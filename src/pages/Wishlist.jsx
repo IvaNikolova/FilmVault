@@ -10,7 +10,7 @@ export default function Wishlist() {
   const { user } = useAuth();
   const [ movies, setMovies ] = useState([]);
   const [ page, setPage ] = useState(1);
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = 18;
 
   useEffect(() => {
     if (!user) return;
@@ -37,7 +37,7 @@ export default function Wishlist() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 pl-2 text-black">My Wishlist</h1>
+      <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">My Wishlist</h1>
 
       {movies.length === 0 ? (
         <p className="text-gray-600">Your wishlist is empty</p>
@@ -49,7 +49,7 @@ export default function Wishlist() {
         />
       )}
 
-      {totalPages > 1 && (
+      {movies.length > 18 && (
         <Pagination
           page={page}
           totalPages={totalPages}

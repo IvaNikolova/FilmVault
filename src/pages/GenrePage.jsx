@@ -4,14 +4,12 @@ import { getMoviesByGenre, getGenres } from "../api/tmdb";
 import MovieGrid from "../components/MovieGrid";
 import Pagination from "../components/Pagination";
 
-
 export default function GenrePage() {
     const { id } = useParams();
     const [ movies, setMovies ] = useState([]);
     const [ genreName, setGenreName ] = useState("");
     const [ page, setPage ] = useState(1);
     const [ totalPages, setTotalPages ] = useState(1);
-
 
     useEffect(() => {
         async function loadMoviesAndName() {
@@ -22,23 +20,26 @@ export default function GenrePage() {
             const match = allGenres.find(g => g.id === parseInt(id));
             if (match) setGenreName(match.name);
 
-            // Fetch movies for selected page
-            const response = await getMoviesByGenre(id, page);
-            setMovies(Array.isArray(response.results) ? response.results : []);
+            const response = await getMoviesByGenre(id, page)
+            setMovies(response.results.slice(0, 18))
             setTotalPages(Math.min(response.totalPages, 20));
         }
         loadMoviesAndName();
     }, [id, page]);
+
+    useEffect(() => {
+        console.log("RENDER MOVIES:", movies.length);
+    }, [movies]);
+
 
     // Reset page when genre changes
     useEffect(() => {
         setPage(1);
     }, [id]);
 
-
     return (
         <div className="p-6 text-black">
-            <h1 className="text-3xl font-bold mb-6">
+            <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">
                 {genreName ? `${genreName} Movies` : "Movies"}
             </h1>
 
@@ -49,6 +50,6 @@ export default function GenrePage() {
                 totalPages={totalPages}
                 setPage={setPage}
             />
-        </div>
+         </div>
     );
 }

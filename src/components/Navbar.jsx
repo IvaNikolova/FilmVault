@@ -34,7 +34,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-gray-900 backdrop-blur-xl border-b border-white/10 shadow-lg">
+    <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-lg">
       <div className="max-w-8xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* LOGO */}
@@ -93,7 +93,7 @@ export default function Navbar() {
               </button>
 
               {openMenu && (
-                <div className="absolute right-0 mt-4 w-52 bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-xl overflow-hidden">
+                <div className="absolute right-0 mt-4 w-52 bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-xl overflow-hidden">
 
                   <div className="px-4 py-3 border-b border-white/10">
                     <p className="text-sm font-semibold text-white">

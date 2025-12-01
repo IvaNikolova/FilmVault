@@ -152,7 +152,7 @@ export default function Recommendations() {
     const combined = [...map.values()]
       .sort((a, b) => b.score - a.score)
       .map((entry) => entry.movie)
-      .slice(0, 40);
+      .slice(0, 42);
       
     setFinalRecommendations(combined);
   }, [genreMovies, similarMovies]);
@@ -188,7 +188,7 @@ export default function Recommendations() {
 
   return (
     <div className="p-6 text-black">
-      <h1 className="text-3xl font-bold mb-6 pl-2">Recommendations</h1>
+      <h1 className="text-3xl font-bold px-2 pl-2 sm:px-6 lg:px-14">Recommendations</h1>
 
       {/* <div className="mb-6 p-4 bg-gray-100 rounded-lg text-gray-700 text-sm">
         <p>
