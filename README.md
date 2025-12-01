@@ -1,16 +1,74 @@
-# React + Vite
+# FilmVault
+A modern movie discovery & wishlist platform built with React, Firebase, and the TMDB API.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+FilmVault is a web application that allows users to discover movies, view details, save favorites to a wishlist, and receive recommendations. 
+The app integrates real-time data from the TMDB API and manages authentication and personalization using Firebase.
 
-Currently, two official plugins are available:
+**Users can:**
+- Register and log in
+- Browse movies by category and genre
+- View detailed movie information
+- Add and remove movies from a personal wishlist
+- Receive recommendations
+- Explore related movies
+- Search movie titles instantly
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal of this project was to simulate a production-ready movie platform with modern UI/UX design and efficient data handling.
 
-## React Compiler
+## Features
+- User authentication (Firebase Auth)
+- Add/remove movies from Wishlist
+- Browse movies by categories and genre
+- Search for movies
+- Detailed movie pages with genre, rating & description
+- Personalized recommendations
+- Related movies section
+- Pagination & clean grid layout
+- Real-time wishlist updates using Firestore
+- Responsive design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+**Frontend:**
+- React
+- Tailwind CSS
+- Lucide-react icons
+- Lovable
 
-## Expanding the ESLint configuration
+**Backend / Services:**
+- Firebase Authentication
+- Firestore Database
+- TMDB API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Other Tools:**
+- React Router
+- GitHub
+- Vite
+
+## Project Architecture
+- `pages/` → main views (Login, Register, Wishlist, Movie Details and etc.)
+- `components/` → reusable UI components (Navbar, MovieCard, MovieGrid, Pagination and etc.)
+- `context/` → authentication handling
+- `api/` → TMDB API logic
+- `firebase.js` → Firebase setup and Firestore functions
+
+## Authentication Flow
+FilmVault uses Firebase Authentication:
+- Users can register & sign in with email and password
+- Each user has a Firestore document
+- Wishlist is stored per-user
+- Username is saved and displayed in the UI
+- Real-time updates when wishlist changes
+
+## Run Locally 
+**Install:**
+  - `git clone https://github.com/IvaNikolova/FilmVault.git`
+  - `cd FilmVault`
+  - `npm install`
+
+**Environment setup:**
+  - Create `.env`
+    - `VITE_TMDB_KEY=your_api_key_here`
+      
+**Start:**
+  - `npm run dev`
