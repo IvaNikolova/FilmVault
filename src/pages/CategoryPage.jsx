@@ -21,12 +21,6 @@ export default function CategoryPage() {
         async function loadMovies() {
             const response = await getMoviesByCategory(type, page)
             
-            
-            if (!response || !response.results) {
-                console.error("Invalid API response", response);
-                return;
-            }
-            
             setMovies(response.results.slice(0, 18))
             setTotalPages(Math.min(response.total_pages, 20));
         }
