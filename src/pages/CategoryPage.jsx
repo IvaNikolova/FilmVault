@@ -20,12 +20,24 @@ export default function CategoryPage() {
     useEffect(() => {
         async function loadMovies() {
             const response = await getMoviesByCategory(type, page)
+            
+            
+            if (!response || !response.results) {
+                console.error("Invalid API response", response);
+                return;
+            }
+            
             setMovies(response.results.slice(0, 18))
-            setTotalPages(Math.min(response.totalPages, 20));
+            setTotalPages(Math.min(response.total_pages, 20));
         }
 
         loadMovies();
     }, [type, page]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [type]);
+
 
     return (
         <div className="p-6 text-black">

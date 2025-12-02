@@ -27,11 +27,6 @@ export default function GenrePage() {
         loadMoviesAndName();
     }, [id, page]);
 
-    useEffect(() => {
-        console.log("RENDER MOVIES:", movies.length);
-    }, [movies]);
-
-
     // Reset page when genre changes
     useEffect(() => {
         setPage(1);
