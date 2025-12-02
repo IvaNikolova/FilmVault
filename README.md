@@ -29,21 +29,11 @@ The goal of this project was to simulate a production-ready movie platform with 
 - Responsive design
 
 ## Tech Stack
-**Frontend:**
-- React
-- Tailwind CSS
-- Lucide-react icons
-- Lovable
+**Frontend:** React, Tailwind CSS, Lucide-react icons and Lovable
 
-**Backend / Services:**
-- Firebase Authentication
-- Firestore Database
-- TMDB API
+**Backend / Services:** Firebase Authentication, Firestore Database and TMDB API
 
-**Other Tools:**
-- React Router
-- GitHub
-- Vite
+**Other Tools:** React Router, GitHub and Vite
 
 ## Project Architecture
 - `pages/` → main views (Login, Register, Wishlist, Movie Details and etc.)
@@ -70,7 +60,7 @@ FilmVault uses Firebase Authentication:
   - Create `.env`
     - `VITE_TMDB_KEY=your_api_key_here`
       
-**Start:**
+**Start the app:**
   - `npm run dev`
 
 ## Run with Docker
@@ -87,10 +77,8 @@ Make sure you have installed:
     - `VITE_TMDB_KEY=your_api_key_here`
 
 **Build and start the app:**
-- docker-compose up --build
-
-**Open the app in your browser:**
-- `http://localhost:5173`
+- `docker-compose up --build`
+- Open the app in your browser: `http://localhost:5173`
 
 **Stop the app:**
 - `docker-compose down`
