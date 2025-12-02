@@ -72,3 +72,26 @@ FilmVault uses Firebase Authentication:
       
 **Start:**
   - `npm run dev`
+
+## Run with Docker
+Make sure you have installed:
+- Docker Desktop
+- Docker Compose (included in Docker Desktop)
+
+**Clone the repository:**
+- `git clone https://github.com/IvaNikolova/FilmVault.git`
+- `cd FilmVault`
+
+**Environment setup:**
+  - Create `.env`
+    - `VITE_TMDB_KEY=your_api_key_here`
+
+**Build and start the app:**
+- docker-compose up --build
+
+**Open the app in your browser:**
+- `http://localhost:5173`
+
+**Stop the app:**
+- `docker-compose down`
+    
