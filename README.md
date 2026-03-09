@@ -92,6 +92,6 @@ Create `.env`
 ## Author
 **Iva Nikolova**
 
-Master’s in Computer Engineering with a focus on **Frontend Development and Data Science.**
+Master’s degree in Informatics and Computer Engineering with a focus on **Frontend Development and Data Science.**
 
 FilmVault demonstrates my ability to **design and implement modern web apps**, integrating APIs, authentication, and real-time updates with React and Firebase.
